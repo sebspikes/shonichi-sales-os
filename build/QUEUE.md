@@ -9,7 +9,7 @@ Each session is ONE phase doc (or a named part of one). Open the next unchecked 
 ## The queue
 
 - [ ] **S0 — Scaffold** (done in the planning session that created this repo; tick after both founders have read CLAUDE.md)
-- [ ] **S1 — Phase 01: Offer & case study** — `phases/01-offer.md` (Tue 2 Sept)
+- [x] **S1 — Phase 01: Offer & case study** — `phases/01-offer.md` (Tue 2 Sept) — drafted, awaiting Sotirios ratification
 - [ ] **S2 — Phase 02: ICP & channel map** — `phases/02-icp-channels.md` (Wed 3 Sept)
 - [ ] **S3 — Phase 03: Airtable CRM** — `phases/03-airtable-crm.md` (Thu 4 Sept)
 - [ ] **S4 — Phase 04: Message engine** — `phases/04-message-engine.md` (Fri 5 Sept)
@@ -27,6 +27,12 @@ Each session is ONE phase doc (or a named part of one). Open the next unchecked 
 - [ ] **Sun 20 Sept — machine signed off at pre-departure review; flip status line to LIVE**
 
 Dates are the default mapping; slide them if a day gets eaten, but the ORDER is fixed — each phase's output feeds the next. If a session finishes its task early, pull the next phase forward; never split an hour across two phases.
+
+## Backlog (not a session; pick up when a session finishes early)
+
+- Pull Altoluxo review scores from Hostaway, March to September 2026, and put a number on "review scores improved" in `core/offer.md`.
+- Phase 05: correct the pulse footer ("62%+ resolved autonomously") to match `core/offer.md`, and retire the HostMind name from all report templates.
+- Claude Code environment: add `reports.shonichi.ai` to allowed domains so sessions can open the interactive reports (blocked 2 Sept).
 
 ## Operating mode (after LIVE)
 

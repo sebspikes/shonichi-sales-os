@@ -12,13 +12,13 @@ Each session is ONE phase doc (or a named part of one). Open the next unchecked 
 - [x] **S1 — Phase 01: Offer & case study** — `phases/01-offer.md` (Tue 2 Sept) — drafted, awaiting Sotirios ratification
 - [x] **S2 — Phase 02: ICP & channel map** — `phases/02-icp-channels.md` (Wed 3 Sept) — drafted, awaiting Sotirios ratification
 - [ ] **S3 — Phase 03: Airtable CRM** — `phases/03-airtable-crm.md` (Thu 4 Sept)
-- [ ] **S4 — Phase 04: Message engine** — `phases/04-message-engine.md` (Fri 5 Sept)
+- [ ] **FN 5 Sept — Sotirios onboarding + S4 Phase 04: Message engine** — `phases/00-sotirios-onboarding.md` then `phases/04-message-engine.md` (Fri 5 Sept). Trigger: "I am working with Sotirios this evening, let's start"
 - [ ] **S5 — Phase 05: Pulse integration** — `phases/05-pulse-integration.md` (Sun 7 Sept; bring the n8n webhook URL)
 - [ ] **S6a — Phase 06: Lead sourcing, actor bake-off** — `phases/06-lead-sourcing.md` (Mon 8 Sept)
 - [ ] **S6b — Phase 06: Lead sourcing, first 100 leads** (Tue 9 - Wed 10 Sept)
 - [ ] **S7a — Phase 07: Enrichment & qualification** — `phases/07-enrichment.md` (Thu 11 Sept)
 - [ ] **S7b — Phase 07: wave one ranked** (Fri 12 Sept)
-- [ ] **FN 12 Sept — Sotirios onboarding evening**: environment set up, joint dry-run of a build session, core rules locked together
+- [ ] **FN 12 Sept — Checkpoint**: Sotirios has run one solo session this week; review what broke, warm-start leads worked, core amendments if any
 - [ ] **S8 — Phase 08: End-to-end dry run** — `phases/08-dry-run.md` (Sun 14 Sept)
 - [ ] **S9 — Phase 09: Scoreboard & notifications** — `phases/09-scoreboard.md` (Mon 15 Sept)
 - [ ] **S10a — Phase 10: Soft launch, first real sends** — `phases/10-soft-launch.md` (Tue 16 - Wed 17 Sept)
@@ -33,7 +33,7 @@ Dates are the default mapping; slide them if a day gets eaten, but the ORDER is 
 - Pull Altoluxo review scores from Hostaway, March to September 2026, and put a number on "review scores improved" in `core/offer.md`.
 - Phase 05: correct the pulse footer ("62%+ resolved autonomously") to match `core/offer.md`, and retire the HostMind name from all report templates.
 - Seb, this week: buy one Sales Navigator seat; chase Asaad on the Hostaway Marketplace contract; ask Joel for two named intros once the case study is ratified.
-- 12 Sept onboarding evening: capture Seb's warm-start list into Airtable; confirm what Sotirios has already sent.
+- Thu 4 Sept, before Friday: Sotirios needs a GitHub account (add as collaborator), a Claude account with Claude Code, and an Airtable invite. Checklist in `phases/00-sotirios-onboarding.md`.
 - Claude Code environment: add `reports.shonichi.ai` to allowed domains so sessions can open the interactive reports (blocked 2 Sept).
 
 ## Operating mode (after LIVE)

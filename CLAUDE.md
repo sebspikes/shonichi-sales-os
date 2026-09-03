@@ -10,8 +10,9 @@ Shonichi handles guest communications 24/7 for short-term rental operators and t
 
 1. `git pull` FIRST, always. This repo syncs between two people and multiple machines.
 2. One singular task per session. The unit of deep work is the session, not the project.
-3. Every session ends with: a log entry (see Log format), a commit, and a push. No exceptions.
-4. If you do not know which founder you are talking to, ask once and remember for the session.
+3. Before any commit, Claude shows the founder every decision and file change in plain English and waits for a yes.
+4. Every session ends with: a log entry (see Log format), a commit, and a push. No exceptions.
+5. If you do not know which founder you are talking to, ask once and remember for the session.
 
 ## The four commands
 

@@ -20,6 +20,9 @@ Shonichi handles guest communications 24/7 for short-term rental operators and t
 - Read `build/QUEUE.md`. If the build phase is not complete: open the next unfinished phase doc in `build/phases/` and execute it with the founder. Each phase doc is a complete brief: context, objective, decisions, step plan.
 - If the machine is live (QUEUE.md says so): generate today's queue from Airtable — follow-ups due first, then fresh leads owned by this founder, ordered by priority. Draft messages from `messages/` templates personalised with the lead record and pulse findings. The founder edits and sends. Update Airtable states as you go.
 
+### "I am working with Sotirios this evening, let's start"
+- Open `build/phases/00-sotirios-onboarding.md`. Run Part A with Sotirios at the keyboard, then Part B (the scheduled phase) with both founders. Seb drives the session; Claude walks him through what to do with Sotirios step by step.
+
 ### "log my session"
 Write `logs/<founder>/YYYY-MM-DD.md` from `logs/TEMPLATE.md`, update the scoreboard, fire the notification webhook (see Notifications), commit, push.
 

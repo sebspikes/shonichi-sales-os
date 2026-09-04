@@ -11,7 +11,7 @@ Each session is ONE phase doc (or a named part of one). Open the next unchecked 
 - [ ] **S0 — Scaffold** (done in the planning session that created this repo; tick after both founders have read CLAUDE.md)
 - [x] **S1 — Phase 01: Offer & case study** — `phases/01-offer.md` (Tue 2 Sept) — drafted, awaiting Sotirios ratification
 - [x] **S2 — Phase 02: ICP & channel map** — `phases/02-icp-channels.md` (Wed 3 Sept) — drafted, awaiting Sotirios ratification
-- [ ] **S3 — Phase 03: Airtable CRM** — `phases/03-airtable-crm.md` (Thu 4 Sept)
+- [x] **S3 — Phase 03: Airtable CRM** — `phases/03-airtable-crm.md` (Thu 4 Sept) — base built, awaiting Sotirios ratification
 - [ ] **FN 5 Sept — Sotirios onboarding + S4 Phase 04: Message engine** — `phases/00-sotirios-onboarding.md` then `phases/04-message-engine.md` (Fri 5 Sept). Trigger: "I am working with Sotirios this evening, let's start"
 - [ ] **S5 — Phase 05: Pulse integration** — `phases/05-pulse-integration.md` (Sun 7 Sept; bring the n8n webhook URL)
 - [ ] **S6a — Phase 06: Lead sourcing, actor bake-off** — `phases/06-lead-sourcing.md` (Mon 8 Sept)

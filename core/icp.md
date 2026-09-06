@@ -1,6 +1,6 @@
 # Ideal customer profile
 
-> STATUS: DRAFTED Phase 02 (Seb, 3 Sept 2026). Awaiting Sotirios ratification. LOCKED CORE: changes need both founders.
+> STATUS: FINAL, Phase 02 (Seb, 3 Sept 2026). LOCKED CORE: Seb's decisions are final.
 
 ## The one-minute test
 

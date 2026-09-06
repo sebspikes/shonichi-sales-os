@@ -1,6 +1,6 @@
 # The Shonichi offer
 
-> STATUS: DRAFTED Phase 01 (Seb, 2 Sept 2026). Awaiting Sotirios ratification. LOCKED CORE: changes need both founders.
+> STATUS: FINAL, Phase 01 (Seb, 2 Sept 2026). LOCKED CORE: Seb's decisions are final.
 > Product name is **Shonichi** / **shonichi.ai** only. "HostMind" is retired and must not appear anywhere.
 
 ## One-line pitch

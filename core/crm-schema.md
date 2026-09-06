@@ -1,6 +1,6 @@
 # Airtable CRM schema
 
-> STATUS: BUILT Phase 03 (Seb, 4 Sept 2026). Awaiting Sotirios ratification. LOCKED CORE: changes need both founders.
+> STATUS: FINAL, Phase 03 (Seb, 4 Sept 2026). LOCKED CORE: Seb's decisions are final.
 > Base: **Shonichi Sales OS** (`appitDnbs9KM3DpQR`) in Seb's workspace. Source of truth for all lead data. Lead PII never lives in git.
 
 Three tables. Claude reads and writes them through the Airtable connection; founders rarely open Airtable. Table and field IDs are listed so sessions can address them without guessing.
@@ -75,6 +75,11 @@ One row per human send. The scoreboard counts these. Nothing is ever written her
 | Quality touch | checkbox. Ticked by default when logged from a personalised draft. Unticked means it scores zero on the board | fldd02AeNoud9wFZN |
 | Reply received | checkbox | fld4714VkfQGnrXTX |
 | Reply summary | long text | fldUe7AlZOcb698pq |
+| Draft | long text, Claude's draft verbatim | fldCVLD0W7o65jKeW |
+| Sent | long text, what the founder actually sent | fldFaYkGFGAarsMJb |
+| Edited | formula: "edited" or "unchanged" once both are filled | fldTGWZn4Ho6EFde4 |
+
+Draft, Sent and Edited added 6 Sept. When logging a touch, Claude writes Draft, asks for Sent ("as drafted" copies Draft across). The Sunday review reads Edited per founder and per template.
 
 ## Pulses (`tblxCDw3x7GDxmkQ1`)
 

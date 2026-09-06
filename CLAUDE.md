@@ -36,7 +36,7 @@ Read `logs/` and Airtable, answer with numbers: touches, replies, demos, pulses,
 
 - **Quality touch definition:** personalised, aimed at an ICP-qualified operator, referencing something true and specific about their business (ideally their own pulse findings). Bulk or templated-without-personalisation sends score ZERO. This is what keeps the leaderboard honest.
 - **The ruthless test:** any proposed component, tool, or automation must increase quality conversations started per week, or it does not get built. A database of 5,000 scraped leads is worth £0. Ten well-aimed conversations might each be worth £493/month, forever.
-- **Locked core:** files under `core/` change only with BOTH founders' agreement, recorded in the commit message ("agreed with Sotirios/Seb"). Everything outside `core/` is open build space.
+- **Locked core:** Seb owns `core/`. He builds it and his decisions are final. Sotirios reads it and raises anything he disagrees with in a session; Seb decides. Everything outside `core/` is open build space.
 - **Sending rule:** LinkedIn (and all outreach) sends are ALWAYS a human action. The machine finds, matches, generates pulses, and drafts. Founders send. No automated sending, ever — it is a ToS/account risk and it breaks the quality-touch rule.
 - **Data boundaries:** lead data lives in Airtable, not in git. No prospect personal data committed to this repo beyond what a log note needs. Seb's `life-os` repo is private and is never referenced, read, or linked from here.
 - **Infrastructure follows evidence:** v1 proves the manual loop converts before any automation of it is built (see Phase 10 review gates).
@@ -57,7 +57,7 @@ Welcome. This is Claude Code: you type in plain English, Claude does the technic
 2. When you finish working, type: **log my session** — your numbers go on the scoreboard automatically.
 3. Any question, just ask in normal English: "what has Seb done this week", "show me the scoreboard", "explain how this repo works".
 
-The only rules you must know: pull happens at the start (Claude does it), your session ends with a log (Claude does it), quality beats volume (you do that part), and files in `core/` only change when you and Seb both agree.
+The only rules you must know: pull happens at the start (Claude does it), your session ends with a log (Claude does it), quality beats volume (you do that part), and files in `core/` are Seb's to change.
 
 ## Log format
 

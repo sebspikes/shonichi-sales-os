@@ -86,6 +86,16 @@ Post-processing rules, applied by Claude in-session (S6b may move them into the 
 
 Manchester result: 44 leads loaded 10 Sept from the bake-off dataset, fully enriched.
 
+## Duplicates, multi-city hosts and linked businesses
+
+Multi-city operators WILL surface again in other city searches (Staycasa, Sleepezee and STK all say "across the UK"). Three layers keep the base clean:
+
+1. **Mechanical dedupe (same host account):** every load upserts on **Airbnb host ID** (`fldBVAmRBSm7fo8is`). A host already in the base gets its row updated, never duplicated. This is why that field exists.
+2. **Post-load verification sweep (Claude, after every city load):** compare new rows against the whole base for (a) case-insensitive brand-name matches and (b) shared listing IDs across Portfolio previews. Shared listing IDs are hard proof two accounts run one portfolio. Mark every find with a `LINKED:` line in Notes on BOTH rows, naming the evidence, and treat the web as one prospect (one owner, one sequence).
+3. **Know what the fields mean:** a lead's City is the operator's base, not the search city; the Portfolio preview is profile-wide, not city-filtered. A host with no visible units in the searched city is normal for multi-city operators (e.g. STK/Staykeepers matched Manchester via one student room while their preview shows London).
+
+Webs marked 10 Sept: City SuperHost (2 accounts, pre-merged), MCR Hospitality + Michelle/Awakend Stays (3 shared listing IDs), The Church (Amar + Hayder, same brand), CEFAS (Tee + Peter, identical profile text).
+
 ## Companies House
 
 Free public data API, 600 requests / 5 min, through the n8n `Companies House` credential:

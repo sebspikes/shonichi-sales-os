@@ -14,7 +14,7 @@ Each session is ONE phase doc (or a named part of one). Open the next unchecked 
 - [x] **S3 — Phase 03: Airtable CRM** — `phases/03-airtable-crm.md` (Thu 4 Sept) — base built, awaiting Sotirios ratification
 - [x] **Thu 4 Sept — Sotirios onboarding** — GitHub, Claude Code and Airtable set up, dry run done
 - [x] **S4 — Phase 04: Message engine** — `phases/04-message-engine.md` (Sun 6 Sept)
-- [ ] **S5 — Phase 05: Pulse integration** — `phases/05-pulse-integration.md` (Mon 7 Sept; bring the n8n webhook URL)
+- [x] **S5 — Phase 05: Pulse integration** — `phases/05-pulse-integration.md` (Mon 8 Sept) — outbound workflow QxVdCclxcIipCccv live, tested end to end
 - [ ] **S6a — Phase 06: Lead sourcing, actor bake-off** — `phases/06-lead-sourcing.md` (Mon 8 Sept)
 - [ ] **S6b — Phase 06: Lead sourcing, first 100 leads** (Tue 9 - Wed 10 Sept)
 - [ ] **S7a — Phase 07: Enrichment & qualification** — `phases/07-enrichment.md` (Thu 11 Sept)
@@ -33,6 +33,10 @@ Dates are the default mapping; slide them if a day gets eaten, but the ORDER is 
 
 - Pull Altoluxo review scores from Hostaway, March to September 2026, and put a number on "review scores improved" in `core/offer.md`.
 - Phase 05: correct the pulse footer ("62%+ resolved autonomously") to match `core/offer.md`, and retire the HostMind name from all report templates.
+- Both founders: set `PULSE_WEBHOOK_URL` and `PULSE_FOUNDER_EMAIL` in a Claude Code environment and allow `shonichi.app.n8n.cloud` (see `tools/pulse.md`). The Default environment would not accept variables for Seb on 8 Sept; create a new environment.
+- Seb, in the n8n editor: in both pulse workflows' Render Reports node, find the two remaining "62%+ resolved autonomously" strings in the onboarding copy and replace with "around half of guest messages resolved autonomously".
+- Seb: rotate the Cloudflare R2 access key that sits in the R2 upload code nodes of both pulse workflows, and reference it from n8n environment variables instead.
+- Seb: decide whether the test lead "Phase 05 pulse test" (a real Clifton listing) stays as an example row or is deleted.
 - Seb: publish a redacted Higgihaus June 2026 Operational Intelligence page on reports.shonichi.ai for template 02e (`{higgihaus_sample_url}`). The source HTML carries guest names and property names; strip both before it goes public.
 - Both founders: create a Calendly link each and put the URLs in `messages/sequences.md` (placeholders now).
 - Seb, this week: buy one Sales Navigator seat; chase Asaad on the Hostaway Marketplace contract; ask Joel for two named intros once the case study is ratified.

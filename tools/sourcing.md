@@ -2,7 +2,7 @@
 
 How to source ICP-qualified STR operator leads from Airbnb into Airtable. Either founder can run this; every step goes through n8n so no API keys are needed on your machine.
 
-**Status: S6a bake-off complete (10 Sept 2026). Winner picked on measured output. Awaiting founder ratification.**
+**Status: S6a complete, ratified by Seb 10 Sept 2026. Winner: tri_angle. Manchester's 44 leads loaded to Airtable.**
 
 ## The pipeline (as proven in the bake-off)
 
@@ -72,7 +72,19 @@ Actor: `tri_angle/airbnb-scraper` (internal ID `GsNzxEKzE2vQ5d9HN`), via the n8n
 Notes:
 - `enrichUserProfiles: true` is what attaches the host block. Never run without it.
 - The Apify n8n node rejects `username~actor` slugs; use the internal actor ID. `S6 Actor Schema Fetch` resolves ID + input schema for any new actor.
-- Post-processing (Claude, in-session or in the production workflow): drop rows with null host, dedupe by `host.id`, keep `managedListingsCount >= 5`, then hand to Phase 07 for ICP qualification (agency/OTA accounts out, operators in).
+
+## Loading to Airtable (ratified 10 Sept, done for Manchester)
+
+Post-processing rules, applied by Claude in-session (S6b may move them into the workflow):
+
+1. Drop rows with a null host (delisted or hotel-inventory rows; 7 of 150 in Manchester).
+2. Dedupe by `host.id`, then by brand name (one lead per brand; note the second host account in Notes, e.g. City SuperHost runs two).
+3. Keep `managedListingsCount` 5 to 150. Above 150 mirrors the ICP upper gate and cuts the OTA aggregator accounts (Travelnest, holidaycottages.co.uk, Finest Retreats) at sourcing.
+4. Create leads with `state=new`, Source channel `Airbnb pipeline`, Country/Wave set, and the sourcing enrichment fields filled: Airbnb host ID, Host rating, Host review count, Years hosting, Superhost, Host about (full text), Portfolio preview (10 listings with ratings, review counts and listing IDs — pulse targets come straight from here).
+5. Re-runs upsert on **Airbnb host ID** (`fldBVAmRBSm7fo8is`) so the same host never creates a duplicate lead.
+6. Gate judgements (Professional host, ICP fit, Owner) are NOT set at sourcing. `new` means gates unchecked; Phase 07 runs the one-minute test.
+
+Manchester result: 44 leads loaded 10 Sept from the bake-off dataset, fully enriched.
 
 ## Companies House
 

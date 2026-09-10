@@ -15,8 +15,8 @@ Each session is ONE phase doc (or a named part of one). Open the next unchecked 
 - [x] **Thu 4 Sept — Sotirios onboarding** — GitHub, Claude Code and Airtable set up, dry run done
 - [x] **S4 — Phase 04: Message engine** — `phases/04-message-engine.md` (Sun 6 Sept)
 - [x] **S5 — Phase 05: Pulse integration** — `phases/05-pulse-integration.md` (Mon 8 Sept) — outbound workflow QxVdCclxcIipCccv live, tested end to end
-- [ ] **S6a — Phase 06: Lead sourcing, actor bake-off** — `phases/06-lead-sourcing.md` (Mon 8 Sept)
-- [ ] **S6b — Phase 06: Lead sourcing, first 100 leads** (Tue 9 - Wed 10 Sept)
+- [x] **S6a — Phase 06: Lead sourcing, actor bake-off** — `phases/06-lead-sourcing.md` (done Wed 10 Sept) — tri_angle/airbnb-scraper won (host block + portfolio size in one pass, ~1p per qualified lead); recipe in `tools/sourcing.md`; 44 enriched Manchester leads already in Airtable; 7 sourcing fields added to the CRM (ratified)
+- [ ] **S6b — Phase 06: Lead sourcing, first 100 leads** (Tue 9 - Wed 10 Sept) — Manchester done (44); remaining wave 1: Liverpool, Bristol, Cardiff, Newport, Brighton; plus CH + LinkedIn contact routes for the triple-match
 - [ ] **S7a — Phase 07: Enrichment & qualification** — `phases/07-enrichment.md` (Thu 11 Sept)
 - [ ] **S7b — Phase 07: wave one ranked** (Fri 12 Sept)
 - [ ] **FN 12 Sept — Checkpoint**: Sotirios has run one solo session this week; review what broke, warm-start leads worked, core amendments if any

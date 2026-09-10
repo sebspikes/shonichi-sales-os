@@ -35,6 +35,17 @@ One row per operator. Fields grouped by what they are for.
 | Decision maker found | checkbox | fld8dQvOjGo5MNWMP |
 | ICP fit | select: Qualified, Borderline, Parked, Disqualified. Set by a founder at qualification, never by formula | fldr2ew7eh3GIIJ8I |
 
+**Sourcing enrichment** (written by the Phase 06 pipeline from Airbnb host-profile data; added 10 Sept 2026, ratified by Seb)
+| Field | Type | ID |
+|---|---|---|
+| Airbnb host ID | text. Upsert/dedupe key for pipeline re-runs | fldBVAmRBSm7fo8is |
+| Host rating | number (2dp). Portfolio-wide; below ~4.6 is a pulse angle | fldvVl8qO0wo6hke8 |
+| Host review count | number | fldUq1cYW1BI0y4dl |
+| Years hosting | number | fldapqYLqZCAZiKYn |
+| Superhost | checkbox | fldHT0bgqakgxTh2Y |
+| Host about | long text, the host's full self-written profile | fldfsJfrD8u0Ryv8l |
+| Portfolio preview | long text, up to 10 listings: rating, review count, title, listing ID per line. Pulse target selection without a re-scrape | fld9veVkTE3iei8bw |
+
 **Sales**
 | Field | Type | ID |
 |---|---|---|

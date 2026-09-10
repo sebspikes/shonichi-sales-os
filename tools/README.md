@@ -1,7 +1,7 @@
 # Tools
 
 Scripts land here as the build phases produce them:
-- `pulse.*` — Property Pulse wrapper (Phase 05)
+- `pulse.sh` + `pulse.md` — outbound Property Pulse wrapper and wiring (Phase 05)
 - `sourcing.md` + scripts — the Airbnb-first lead pipeline recipe (Phase 06)
 - `scoreboard` — leaderboard renderer (Phase 09)
 - `routines.md` — per-founder daily notification routine recipe (Phase 09)

@@ -83,7 +83,7 @@ Draft, Sent and Edited added 6 Sept. When logging a touch, Claude writes Draft, 
 
 ## Pulses (`tblxCDw3x7GDxmkQ1`)
 
-One row per Property Pulse generated. Reports live at their reports.shonichi.ai URL; nothing is attached in Airtable.
+One row per Property Pulse generated. Written by the outbound n8n workflow (see `tools/pulse.md`): it creates the row with URLs, score, three operational findings and status generated, then sets the linked lead to pulse_ready and fills Pain signals and Next action when the pulse is sendable (10+ reviews, headline passed the positioning guard), otherwise leaves the lead at researched with a Next action explaining why. Reports live at their reports.shonichi.ai URL; nothing is attached in Airtable.
 
 | Field | Type | ID |
 |---|---|---|
@@ -92,10 +92,12 @@ One row per Property Pulse generated. Reports live at their reports.shonichi.ai 
 | Listing URL | url | fldmX3luO2jk89nfg |
 | Listing ID | text | fld0GovOgJi7NrzaM |
 | Date generated | date (ISO) | fldz4cLfSJOo2nNmK |
-| Report URL | url | fldt1XgmxSZlNI1Wq |
+| Report URL | url, full report on reports.shonichi.ai | fldt1XgmxSZlNI1Wq |
+| One-pager URL | url, one-page version, added 8 Sept | fldLk72b2JOC0pvop |
 | Score | number, 0 to 100 | fld2NC5lQQq1kdHGW |
 | Headline finding | text, one line, used in the first message | fldhZdePXx4FGYdro |
 | Second finding | text, held for the follow-up | fldYHIfBWKuTr1SLL |
+| Third finding | text, used by the half-pulse variant, added 8 Sept | fldAeRKiS9V4umPMQ |
 | Status | select: requested, generated, sent | fldopd9f3JpWh0Kac |
 
 ## State machine

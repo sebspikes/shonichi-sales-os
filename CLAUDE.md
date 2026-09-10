@@ -27,7 +27,7 @@ Shonichi handles guest communications 24/7 for short-term rental operators and t
 Write `logs/<founder>/YYYY-MM-DD.md` from `logs/TEMPLATE.md`, update the scoreboard, fire the notification webhook (see Notifications), commit, push.
 
 ### "generate me a property pulse <airbnb link or listing id>"
-Fire the pulse workflow (see `tools/pulse.md` once Phase 05 is built), attach the resulting report to the lead's record in Airtable (Pulses table), report the headline finding back.
+Find or create the lead in Airtable, run `tools/pulse.sh <link> <lead id> <founder> <listing count> <company>` (needs `PULSE_WEBHOOK_URL` in the environment, see `tools/pulse.md`), then poll the Pulses table for a new row with that listing ID dated today (2 to 4 minutes, 8 minute timeout) and report the headline finding and whether the lead is sendable. The workflow writes the Pulses row, sets the lead to pulse_ready when the listing has 10+ reviews and the headline passed the positioning guard, otherwise keeps it at researched with a Next action, and emails the founder. Never the prospect. Before firing, count today's Pulses rows for this founder: stop at 10.
 
 ### "scoreboard" / "what has Seb|Sotirios done this week"
 Read `logs/` and Airtable, answer with numbers: touches, replies, demos, pulses, week vs the 25 target, current streak, head-to-head.
@@ -75,3 +75,8 @@ note: one line on what happened
 ```
 
 Machine-countable. The scoreboard, the Slack ping, and Seb's life-os evening review all read these numbers, so the format is fixed (locked-core rule applies to this section).
+
+## Codex plugin
+The openai codex plugin is installed in Claude Code.
+- Before I deploy or merge a change touching more than a few files or any auth, payment, or guest-facing logic, remind me once to run /codex:adversarial-review if it has not been run on that diff. Do not remind me for small edits.
+- If you have made three or more failed attempts at the same bug, suggest /codex:rescue for a second opinion.

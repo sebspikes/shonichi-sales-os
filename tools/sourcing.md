@@ -94,7 +94,19 @@ Multi-city operators WILL surface again in other city searches (Staycasa, Sleepe
 2. **Post-load verification sweep (Claude, after every city load):** compare new rows against the whole base for (a) case-insensitive brand-name matches and (b) shared listing IDs across Portfolio previews. Shared listing IDs are hard proof two accounts run one portfolio. Mark every find with a `LINKED:` line in Notes on BOTH rows, naming the evidence, and treat the web as one prospect (one owner, one sequence).
 3. **Know what the fields mean:** a lead's City is the operator's base, not the search city; the Portfolio preview is profile-wide, not city-filtered. A host with no visible units in the searched city is normal for multi-city operators (e.g. STK/Staykeepers matched Manchester via one student room while their preview shows London).
 
-Webs marked 10 Sept: City SuperHost (2 accounts, pre-merged), MCR Hospitality + Michelle/Awakend Stays (3 shared listing IDs), The Church (Amar + Hayder, same brand), CEFAS (Tee + Peter, identical profile text).
+Webs marked 10 Sept: City SuperHost (2 accounts, pre-merged), MCR Hospitality + Michelle/Awakend Stays (3 shared listing IDs), The Church (Amar + Hayder, same brand), CEFAS (Tee + Peter, identical profile text). 11 Sept: CH officers resolved two webs — Michelle Cooper is MCR Hospitality's sole director; Peter Ajayi is CEFAS's founder.
+
+## The holidayfuture.com seam (found 11 Sept, S7a)
+
+`site:holidayfuture.com <city>` on a web search returns operators whose DIRECT BOOKING SITE runs on Hostaway — gate 4 pre-passed, the hardest evidence in the funnel, free. The Manchester query surfaced Elan Residences (already a lead, promoted on the spot) plus MOVR, Torr Property Group, Vista Stays, Stay Manchester City Centre, Mbawa & Sons, and Lushpads/Satori — none of which the Airbnb search had caught. Run this query for every city alongside the tri_angle search; any operator found here starts with PMS=Hostaway confirmed.
+
+## Contact-route chase results (S7a, Manchester cohort)
+
+The brand → Companies House → officers → LinkedIn flow (workflow `S7 Companies House Sweep`, edit the Brand queries node per batch):
+- Branded operators: 12/15 CH company matches, decision-maker names for 11, LinkedIn URLs for 6 of the top prospects. The flow works.
+- Trading names with no registered company under that name (BookMyPlace, Awakend Stays, Kaver, Pendrose, Elan) stall CH matching — website/LinkedIn-company-page routes fill some gaps; the rest need the no-cookie LinkedIn actors.
+- Unbranded personal-name hosts (Andrew, Aaron, James) produce nothing cheaply even at 23-30 listings. Expected; they stay Borderline as route-dead until an actor-based pass.
+- CH search false positives happen (Awaken Drinks for Awakend Stays, Coffee Kavern for Kaver) — a human/Claude judgement pass on candidates is mandatory before trusting a match.
 
 ## Companies House
 

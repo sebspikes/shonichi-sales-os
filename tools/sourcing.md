@@ -55,7 +55,16 @@ One 150-listing Manchester search, 85 seconds, $0.50:
 - Cost per qualified 5+ host: about 1p
 - 100-lead target ≈ 2-3 city searches ≈ $1-2 total
 
-## The run recipe (winner)
+## THE CITY RUN (standard, ratified by Seb 11 Sept)
+
+Every city is worked with BOTH steps, in this order:
+
+1. **The seam first** (free, 2 minutes): web-search `site:holidayfuture.com <city>`. Every hit is a Hostaway customer's direct-booking site — gate 4 pre-passed. For each operator found, work backwards: `S7 Holidayfuture Site Scan` counts their units from their own site (the 15-unit floor decides billability), `S7 Companies House Sweep` finds the company + directors, web search finds LinkedIn. Their Airbnb host account connects later via step 2's brand dedupe.
+2. **The Airbnb sweep** (~$0.50, 90 seconds): the tri_angle recipe below. Catches the professional operators NOT on Hostaway yet (pulse still works on them; PMS is chased at qualification).
+
+The seam finds certainty, the sweep finds volume. Manchester proof: the seam alone produced Torr Property Group and Vista Stays — both Hostaway-confirmed, both at the 15-unit floor, both with named directors — in under half an hour.
+
+## The run recipe (Airbnb sweep)
 
 Actor: `tri_angle/airbnb-scraper` (internal ID `GsNzxEKzE2vQ5d9HN`), via the n8n Apify node, operation "Run actor and get dataset", credential `Apify account`. Input:
 

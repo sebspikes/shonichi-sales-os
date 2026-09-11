@@ -29,6 +29,8 @@ All scraping runs through n8n (`shonichi.app.n8n.cloud`) using credentials store
 | CH test workflow | `S6 Companies House Credential Test` | Fire any time to re-verify the key |
 | Actor schema fetch | `S6 Actor Schema Fetch` | Pulls any actor's input schema + internal ID via the Apify API. Reuse before wiring any new actor |
 | Bake-off workflow | `S6 Bake-off Round 1 — Airbnb search actors` | Also carries the `Run costs` branch for per-run USD figures |
+| LinkedIn schema fetch | `S7 LinkedIn Actor Schema Fetch` | harvestapi actor internal IDs + input schemas |
+| LinkedIn route pass | `S7 LinkedIn Route Pass` | harvestapi no-cookie person/employee search for route-dead leads. Edit the `Search targets` Code node per batch, execute, judge the `Route candidates` output. Short mode, pay-per-result (~$0.05 per 10-query batch) |
 
 Claude runs these through the n8n connection in a session. Ask in plain English: "run the sourcing search for Liverpool".
 
@@ -116,6 +118,17 @@ The brand → Companies House → officers → LinkedIn flow (workflow `S7 Compa
 - Trading names with no registered company under that name (BookMyPlace, Awakend Stays, Kaver, Pendrose, Elan) stall CH matching — website/LinkedIn-company-page routes fill some gaps; the rest need the no-cookie LinkedIn actors.
 - Unbranded personal-name hosts (Andrew, Aaron, James) produce nothing cheaply even at 23-30 listings. Expected; they stay Borderline as route-dead until an actor-based pass.
 - CH search false positives happen (Awaken Drinks for Awakend Stays, Coffee Kavern for Kaver) — a human/Claude judgement pass on candidates is mandatory before trusting a match.
+
+## LinkedIn actor pass results (S7b, Manchester cohort)
+
+The harvestapi no-cookie route (`S7 LinkedIn Route Pass`, ~$0.05 for 15 queries across two batches):
+- **Found (5)**: George Torr (Director, Torr Property Group — profile is a pure SA/contractor pitch), Marc Walters (Supercity), Ozzy Cinalp (Director, Book My Place, 6y — found via the company-employees actor on their LinkedIn company page), Emma O'Rourke (Founder, Kaver Property Group — solved a surname-unknown lead and surfaced her business email), Austin Mbawa (exact-name match).
+- **Not found (4)**: Kevin Lowry (three query shapes), Zabir Hussain, Michelle Cooper personal profile, anything for Britannia (generic brand).
+- **Judgement still mandatory**: the first Pendrose hit (Akay Raheem) had no visible tie to the brand; a verification probe found a second, stale profile listing "Property Manager, Pendrose Home" — recorded in Notes as unverified, NOT written to the LinkedIn URL field.
+- Pattern: named person + brand = high hit rate; brand-only fuzzy queries = judge hard; no surname + no brand = do not search (wrong-person risk). The company-employees actor works when a LinkedIn company page URL is known.
+- URLs come back in LinkedIn's member-ID form (`linkedin.com/in/ACwAA...`) — they open fine in a browser.
+- **Company-page lever (batch 3-4)**: `harvestapi/linkedin-company-search` (actor taHaRcqil3scbchuI) finds company pages, then the employees actor mines them. It cracked Book My Place but false-positives at COMPANY level too: `linkedin.com/company/vista-stays` looked right (Hospitality, 22 followers) and turned out to be an Indian boutique-hotel group — its employees (Delhi/Nainital/Trinidad) exposed it. Rule: always check the employees' geography before trusting a company-page match. My-Places/Elan/Stay Manchester City Centre have no real pages.
+- Coverage after S7b: 12 of 22 wave-one leads have a LinkedIn or warm route; every searchable identity has been searched. The remaining gaps are missing upstream identities (no surname or no confirmed company), not missing tooling — city sweeps + brand dedupe fix these over time, and Sales Navigator (backlog) is the next tool-level upgrade if reply data justifies it.
 
 ## Companies House
 

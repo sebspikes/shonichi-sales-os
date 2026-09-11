@@ -1,55 +1,70 @@
-# Session handover — 11 Sept 2026 (Seb)
+# Session handover — 11 Sept 2026, evening (Seb, S7b)
 
 For the next Claude session: this is the live state. Read this, `build/QUEUE.md`, and `tools/sourcing.md` before doing anything. `git pull` first, always.
 
 ## Where the build is
 
-- **S6a + S6b (Manchester) done, S7a done.** Next up: **S7b — wave one ranking and owner assignment** (see below).
+- **Phase 07 COMPLETE** (S7a + S7b, both done Thu 11 Sept — S7b ran a day early). Next up: **FN 12 Sept checkpoint** (Sotirios solo-session review), then **S8 dry run** (Sun 14 Sept, `build/phases/08-dry-run.md`).
 - Machine status: still BUILD PHASE. Deadline unchanged: live by Fri 18 Sept, signed off Sun 20 Sept.
 
 ## Airtable state (base appitDnbs9KM3DpQR, Leads tblPKi621zaYsyNiw)
 
-49 leads, all Manchester-cohort. Every row has an ICP verdict:
+49 leads. **Wave one = 22 leads, all at `researched`, ranked, owner-assigned** (11 Seb / 11 Sotirios). Rank, priority and route status live in each record's Notes ("S7b 11 Sept" line) and the Priority field. The ranked order:
 
-- **7 Qualified** (contact-ready, PMS unknown unless stated): Staycasa (Gin Fung Yong), Evolve Stays (Ciaran Thornley — Seb has him on LinkedIn already, prior outreach no reply, owner must be Seb), MCR Hospitality (Michelle Cooper, sole director), CEFAS (Peter Ajayi, Founder/CEO), Sleepezee (Tommy Gan), CasaCity (Max Scully), Sophie's Homes (Sophie Tierney — Seb knows her personally, warm route; on Hospitable, qualified on Seb's override).
-- **1 Parked**: City Superhost (Matt Smith CEO, Stephanie Hakim) — confirmed on Guesty. First call when the Guesty pilot opens.
-- **Priority-1 seam cohort (Hostaway CONFIRMED via holidayfuture.com)**: Torr Property Group (15 units, George Torr) and Vista Stays (15 units, Kevin Lowry) both meet the billing floor — arguably the two best leads in the base. Mbawa & Sons (8), MOVR (4 visible), Stay Manchester City Centre (3) are under the 15-unit floor — Seb to decide if Hostaway overrides it. These 5 have NO Airbnb host ID yet; the brand dedupe sweep connects them when city sweeps run.
-- **10 Borderline** riding into S7b, including Elan Residences (Hostaway confirmed, 7 units, site half-disabled) and Supercity Aparthotels (Walters family, most Higgihaus-shaped, PMS question outstanding).
-- **26 Disqualified** (22 size, 2 coastal agencies, 3 chains) + 2 rows marked DUPLICATE (Michelle = MCR Hospitality's director; Tee = CEFAS second account).
+| # | Lead | Owner | P | Route |
+|---|---|---|---|---|
+| 1 | Torr Property Group (George Torr) | sotirios | 1 | LinkedIn FOUND (S7b) |
+| 2 | Vista Stays (Kevin Lowry) | seb | 1 | site contact only, no LinkedIn found |
+| 3 | CEFAS (Peter Ajayi) | sotirios | 1 | LinkedIn ✓ — strongest pain in batch, S8 dry-run candidate |
+| 4 | Evolve Stays (Ciaran) | seb | 1 | Seb already connected |
+| 5 | Staycasa (Gin Fung Yong) | sotirios | 1 | LinkedIn ✓ |
+| 6 | Sophie's Homes | seb | 1 | warm personal route |
+| 7 | Sleepezee (Tommy Gan) | sotirios | 2 | LinkedIn ✓ |
+| 8 | CasaCity (Max Scully) | seb | 2 | LinkedIn ✓ |
+| 9 | Kaver Property Group (Emma O'Rourke) | sotirios | 2 | FOUND (S7b): founder + email, in Airtable |
+| 10 | My-Places | seb | 2 | site form; director name unverified |
+| 11 | Supercity Aparthotels (Marc Walters) | seb | 2 | LinkedIn FOUND (S7b); PMS question is the gate |
+| 12 | Book My Place (Ozzy Cinalp) | sotirios | 2 | FOUND (S7b): Director 6y, Manchester |
+| 13 | MCR Hospitality (Michelle Cooper) | sotirios | 2 | brand LinkedIn profile |
+| 14 | Mbawa & Sons (Austin Mbawa) | seb | 2 | LinkedIn FOUND (S7b) — light tier |
+| 15 | MOVR | sotirios | 3 | verify unit count first |
+| 16 | Elan Residences | seb | 2 | site only — light tier |
+| 17 | Stay Manchester City Centre | sotirios | 3 | verify company first |
+| 18-22 | Britannia, Aaron, Andrew, Pendrose, James | mixed | 3 | route-dead (Pendrose has an unverified PM profile in Notes) |
 
-Conventions: Airbnb host ID field = upsert key for re-runs. Duplicate accounts get ICP fit=Disqualified + a DUPLICATE note, kept for the upsert key. Notes carry the audit trail (sourcing line, LINKED evidence, S7a chase results). Full host about-text lives in the Host about field; portfolio previews carry listing IDs that feed `generate me a property pulse <id>` directly.
+- **Light tier (Seb, 11 Sept):** under-floor Hostaway-confirmed operators (Mbawa 8, Elan 7, MOVR 4, Stay MCC 3) are NOT discarded — they ride as a lighter product shape: per-unit pricing (~£30/unit), comms automation + listing reports, growth path towards 25 units. Mbawa + Elan stay in wave one at P2; MOVR + Stay MCC at P3 until unit counts / company are verified. Core write-up is a backlog item (Seb owns it).
+- **City Superhost** stays `parked` (Guesty) — untouched, first call when the Guesty pilot opens.
+- 24 rows Disqualified/DUPLICATE, unchanged. Airbnb host ID remains the upsert key; Torr/Vista/Mbawa/MOVR/Stay MCC still have NO host ID (seam-sourced) — the brand dedupe sweep connects them when city sweeps run.
 
-## n8n workflows built (all in Seb's personal project, all reusable)
+## n8n workflows (all in Seb's personal project, all reusable)
 
 | Workflow | Use |
 |---|---|
 | `S6 Companies House Credential Test` | Fire to re-verify the CH key |
-| `S6 Actor Schema Fetch` | Any Apify actor's input schema + internal ID (the Apify node needs internal IDs, not slugs) |
-| `S6 Bake-off Round 1` | The three search actors + a `Run costs` branch for per-run USD |
-| `S7 Companies House Sweep` | Brand→company→officers batch. Edit the `Brand queries` Code node, execute, read `Pick best` + `Attach officers`. WATCH FOR FALSE POSITIVES — judge the candidates list, the scorer has been fooled twice (Awaken Drinks, Coffee Kavern) |
-| `S7 Holidayfuture Site Scan` | Unit counts from Hostaway direct sites. Edit the `Site URLs` Code node |
+| `S6 Actor Schema Fetch` | Any Apify actor's input schema + internal ID |
+| `S6 Bake-off Round 1` | The three search actors + `Run costs` branch |
+| `S7 Companies House Sweep` | Brand→company→officers batch. WATCH FOR FALSE POSITIVES |
+| `S7 Holidayfuture Site Scan` | Unit counts from Hostaway direct sites |
+| `S7 LinkedIn Actor Schema Fetch` | harvestapi actor IDs + input schemas (NEW, S7b) |
+| `S7 LinkedIn Route Pass` | harvestapi no-cookie LinkedIn search for route-dead leads. Edit the `Search targets` Code node per batch; Short mode, pay-per-result (~$0.05 per 10-query batch). JUDGE every candidate — the Pendrose result needed a verification probe (NEW, S7b) |
 
-Credentials in n8n: `Apify account` (SbLZK9VOgzJ7ihHZ), `Companies House` (LQDMhMOkmsYzHquI, Basic Auth). Never paste keys into sessions; the container blocks api.apify.com, apify.com, and the CH API directly — everything goes through n8n. WebSearch works from the session.
+Credentials in n8n: `Apify account` (SbLZK9VOgzJ7ihHZ), `Companies House` (LQDMhMOkmsYzHquI). Never paste keys into sessions; api.apify.com and the CH API are blocked from the container — everything goes through n8n. WebSearch works from the session.
 
-## Ratified decisions (Seb)
+## Ratified decisions (Seb) — additions this session
 
-1. tri_angle/airbnb-scraper is the sourcing actor (recipe in `tools/sourcing.md`); simpleapi parked (rental), expansion actors skipped.
-2. Leads go straight to Airtable `state=new`; Phase 07 qualifies.
-3. City order: wave 1 — Manchester done, then Liverpool, Bristol, Cardiff, Newport, Brighton.
-4. Cast wide, 20+ listings = clearly a business; borderlines ride the flow.
-5. **THE CITY RUN is two steps**: holidayfuture seam search FIRST (free, gate-4 confirmed), then the Airbnb sweep. See `tools/sourcing.md`.
-6. Hold at the current cohort until the downstream pipeline is proven; remaining cities are one command each.
-7. Every session ends with log, commit, push, PR, squash merge to main (standing authorisation, in CLAUDE.md).
-8. Paid contact enrichment (Apollo/Clay) deferred to Phase 10 on reply-rate evidence; websites + LinkedIn + harvestapi actors cover the current motion.
+Decisions 1-8 from S7a stand (tri_angle actor, city order, two-step city run, hold at current cohort, etc. — see git history of this file if needed). New:
 
-## S7b — the next session's task
+9. **Light tier**: Hostaway-confirmed operators under the 15-unit floor get a lighter shape (per-unit ~£30, comms automation + listing reports, scale-to-25 growth path) instead of parking. Rationale: the UK Hostaway pool is small (~40-80 relevant operators); either branch PMSs later or service small operators cheaply and grow them. Formal `core/` write-up pending (backlog).
+10. Ranking heuristic confirmed: pain × contactability, Hostaway-billable pinned top, VA-hiring intent jumps the queue (none present in this cohort yet).
+11. Personal-name hosts with no surname and no brand (Andrew/Aaron/James) are not actor-searchable — a fuzzy match risks messaging the wrong person. They stay route-dead until they surface on another channel.
 
-1. Rank wave one (best ~25) by **pain signal strength × contactability**; VA-hiring intent jumps the queue. Pain signals are filled on every qualified/borderline row.
-2. Assign owners: alternate by default; **Ciaran/Evolve and Sophie's Homes go to Seb** (personal connections). Move wave one to `researched`.
-3. LinkedIn actor pass (harvestapi no-cookie actors, pay-per-result) for the route-dead leads: Emma/Kaver, Britannia, Pendrose, Book My Place person, Andrew/Aaron/James, seam directors without URLs (George Torr, Kevin Lowry, Austin Mbawa, Zabir Hussain).
-4. Spot-check five wave-one records against the personalisation checklist: decision-maker first name + one specific true finding + portfolio size + city.
-5. Volume context: UK-wide model says ~100-150 qualified operators total, 40-80 Hostaway-relevant; send capacity (25 touches/founder/week) is the constraint, not inventory. Pace sourcing to the scoreboard.
+## For the FN 12 Sept checkpoint + S8 dry run
+
+- Personalisation spot-check passed on the top five (Torr, Vista, CEFAS, Evolve, Staycasa): decision-maker first name + one specific true finding + portfolio size + city all present in each record.
+- S8 dry run picks from wave one. **CEFAS is the flagged candidate** (strongest pain, LinkedIn route, pulse targets sitting in its Portfolio preview). Torr/Vista cannot take a pulse yet — no Airbnb host ID — their pitch runs off their own Hostaway direct sites instead.
+- Sotirios has not run a solo session yet this week (no logs). The checkpoint should cover that plus his 11 wave-one leads.
+- Pulse cap reminder: max 10 pulses per founder per day; none fired yet.
 
 ## Numbers this week (for the scoreboard)
 
-Seb: build sessions 10 + 11 Sept (S6a, S7a). Touches 0, pulses 0 — build phase. Sotirios: no logs yet this week.
+Seb: build sessions 10 + 11 Sept (S6a, S7a + S7b). Touches 0, pulses 0 — build phase. Sotirios: no logs yet this week.

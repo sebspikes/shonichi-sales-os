@@ -14,12 +14,12 @@ For the next Claude session: this is the live state. Read this, `build/QUEUE.md`
 | # | Lead | Owner | P | Route |
 |---|---|---|---|---|
 | 1 | Torr Property Group (George Torr) | sotirios | 1 | LinkedIn FOUND (S7b) |
-| 2 | Vista Stays (Kevin Lowry) | seb | 1 | site contact only, no LinkedIn found |
+| 2 | Vista Stays (Kevin Lowry) | seb | 1 | email + phone + WhatsApp (sweep); no LinkedIn. Main site vistastays.co.uk claims 3 cities |
 | 3 | CEFAS (Peter Ajayi) | sotirios | 1 | LinkedIn ✓ — strongest pain in batch, S8 dry-run candidate |
 | 4 | Evolve Stays (Ciaran) | seb | 1 | Seb already connected |
 | 5 | Staycasa (Gin Fung Yong) | sotirios | 1 | LinkedIn ✓ |
 | 6 | Sophie's Homes | seb | 1 | warm personal route |
-| 7 | Sleepezee (Tommy Gan) | sotirios | 2 | LinkedIn ✓ |
+| 7 | Sleepezee (Tommy Gan) | sotirios | 2 | LinkedIn ✓ — PMS FLAG: booking runs on Zeevou (zeevou.direct tell), PMS set to Other; fit verdict is Seb's call at the checkpoint |
 | 8 | CasaCity (Max Scully) | seb | 2 | LinkedIn ✓ |
 | 9 | Kaver Property Group (Emma O'Rourke) | sotirios | 2 | FOUND (S7b): founder + email, in Airtable |
 | 10 | My-Places | seb | 2 | site form; director name unverified |
@@ -47,6 +47,7 @@ For the next Claude session: this is the live state. Read this, `build/QUEUE.md`
 | `S7 Holidayfuture Site Scan` | Unit counts from Hostaway direct sites |
 | `S7 LinkedIn Actor Schema Fetch` | harvestapi actor IDs + input schemas (NEW, S7b) |
 | `S7 LinkedIn Route Pass` | harvestapi no-cookie LinkedIn search for route-dead leads. Edit the `Search targets` Code node per batch; Short mode, pay-per-result (~$0.05 per 10-query batch). JUDGE every candidate — the Pendrose result needed a verification probe (NEW, S7b) |
+| `S7 Contact Sweep` | Fetches direct-booking sites and regexes out emails/phones/IG/WA/contact links (the container cannot reach these sites; n8n can). Edit the `Site list` Code node per batch. HTML comes back under `data`, not `body` (NEW, S7b) |
 
 Credentials in n8n: `Apify account` (SbLZK9VOgzJ7ihHZ), `Companies House` (LQDMhMOkmsYzHquI). Never paste keys into sessions; api.apify.com and the CH API are blocked from the container — everything goes through n8n. WebSearch works from the session.
 
@@ -57,6 +58,16 @@ Decisions 1-8 from S7a stand (tri_angle actor, city order, two-step city run, ho
 9. **Light tier**: Hostaway-confirmed operators under the 15-unit floor get a lighter shape (per-unit ~£30, comms automation + listing reports, scale-to-25 growth path) instead of parking. Rationale: the UK Hostaway pool is small (~40-80 relevant operators); either branch PMSs later or service small operators cheaply and grow them. Formal `core/` write-up pending (backlog).
 10. Ranking heuristic confirmed: pain × contactability, Hostaway-billable pinned top, VA-hiring intent jumps the queue (none present in this cohort yet).
 11. Personal-name hosts with no surname and no brand (Andrew/Aaron/James) are not actor-searchable — a fuzzy match risks messaging the wrong person. They stay route-dead until they surface on another channel.
+
+## Contact sweep (S7b, late evening — after the first merge)
+
+`S7 Contact Sweep` (new n8n workflow) fetched every wave-one direct site and pulled emails, phones, Instagram, WhatsApp into Airtable. Result: **19 of 22 wave-one leads now have at least one working channel** (LinkedIn, email, phone, IG or WhatsApp); details per record in Airtable.
+
+- Solved outright: Vista Stays (email + phone + WA + main site vistastays.co.uk), Stay Manchester (brand email lets@), MOVR (hello@ + Sheffield phone), Mbawa (Austin's own email on their site), Torr (email + phone on top of LinkedIn), Book My Place (hello@), My-Places (phone/WA/IG).
+- Still dark (3): Elan Residences (no site, no IG, no email anywhere — only their listing pages), Britannia, and the three no-surname hosts Andrew/Aaron/James (Pendrose keeps its unverified PM profile).
+- New tell for the city run: `<brand>.zeevou.direct` = Zeevou customer, same logic as holidayfuture = Hostaway. It caught Sleepezee (PMS moved to Other, evidence in the record; fit verdict for Seb).
+- Seb sent LinkedIn connection requests to the wave-one profiles on 11 Sept evening (noted per record). When accepts come in, first messages ride the S10 sequences.
+- Measured cost of the whole Manchester cohort to date: about £0.70 of Apify plan credits (sweep $0.50 + bake-off reject $0.27 + ~$0.15 of LinkedIn actor results; CH, holidayfuture, site fetches free). Roughly 1.5p per lead in the base, ~4p per researched wave-one lead.
 
 ## For the FN 12 Sept checkpoint + S8 dry run
 

@@ -31,6 +31,7 @@ All scraping runs through n8n (`shonichi.app.n8n.cloud`) using credentials store
 | Bake-off workflow | `S6 Bake-off Round 1 — Airbnb search actors` | Also carries the `Run costs` branch for per-run USD figures |
 | LinkedIn schema fetch | `S7 LinkedIn Actor Schema Fetch` | harvestapi actor internal IDs + input schemas |
 | LinkedIn route pass | `S7 LinkedIn Route Pass` | harvestapi no-cookie person/employee search for route-dead leads. Edit the `Search targets` Code node per batch, execute, judge the `Route candidates` output. Short mode, pay-per-result (~$0.05 per 10-query batch) |
+| Contact sweep | `S7 Contact Sweep` | Fetches direct-booking sites and extracts emails, phones, Instagram, WhatsApp, contact links. Edit the `Site list` Code node per city cohort. Sessions cannot fetch these sites directly (egress proxy); n8n can |
 
 Claude runs these through the n8n connection in a session. Ask in plain English: "run the sourcing search for Liverpool".
 
@@ -109,7 +110,7 @@ Webs marked 10 Sept: City SuperHost (2 accounts, pre-merged), MCR Hospitality + 
 
 ## The holidayfuture.com seam (found 11 Sept, S7a)
 
-`site:holidayfuture.com <city>` on a web search returns operators whose DIRECT BOOKING SITE runs on Hostaway — gate 4 pre-passed, the hardest evidence in the funnel, free. The Manchester query surfaced Elan Residences (already a lead, promoted on the spot) plus MOVR, Torr Property Group, Vista Stays, Stay Manchester City Centre, Mbawa & Sons, and Lushpads/Satori — none of which the Airbnb search had caught. Run this query for every city alongside the tri_angle search; any operator found here starts with PMS=Hostaway confirmed.
+`site:holidayfuture.com <city>` on a web search returns operators whose DIRECT BOOKING SITE runs on Hostaway — gate 4 pre-passed, the hardest evidence in the funnel, free. The same logic works for competitor PMSs: `<brand>.zeevou.direct` = Zeevou customer (caught Sleepezee in S7b, PMS moved to Other), `<brand>.guestybookings.com` = Guesty (caught City Superhost in S7a). Negative tells matter as much as positive ones — they stop us pitching Hostaway-native OpIntel at the wrong stack. The Manchester query surfaced Elan Residences (already a lead, promoted on the spot) plus MOVR, Torr Property Group, Vista Stays, Stay Manchester City Centre, Mbawa & Sons, and Lushpads/Satori — none of which the Airbnb search had caught. Run this query for every city alongside the tri_angle search; any operator found here starts with PMS=Hostaway confirmed.
 
 ## Contact-route chase results (S7a, Manchester cohort)
 
@@ -129,6 +130,10 @@ The harvestapi no-cookie route (`S7 LinkedIn Route Pass`, ~$0.05 for 15 queries 
 - URLs come back in LinkedIn's member-ID form (`linkedin.com/in/ACwAA...`) — they open fine in a browser.
 - **Company-page lever (batch 3-4)**: `harvestapi/linkedin-company-search` (actor taHaRcqil3scbchuI) finds company pages, then the employees actor mines them. It cracked Book My Place but false-positives at COMPANY level too: `linkedin.com/company/vista-stays` looked right (Hospitality, 22 followers) and turned out to be an Indian boutique-hotel group — its employees (Delhi/Nainital/Trinidad) exposed it. Rule: always check the employees' geography before trusting a company-page match. My-Places/Elan/Stay Manchester City Centre have no real pages.
 - Coverage after S7b: 12 of 22 wave-one leads have a LinkedIn or warm route; every searchable identity has been searched. The remaining gaps are missing upstream identities (no surname or no confirmed company), not missing tooling — city sweeps + brand dedupe fix these over time, and Sales Navigator (backlog) is the next tool-level upgrade if reply data justifies it.
+
+## Contact sweep results (S7b, Manchester cohort)
+
+`S7 Contact Sweep` over every wave-one direct site (free, ~15 fetches): emails found for Vista Stays, Stay Manchester, MOVR, Mbawa (the director's own address on their site), Torr (x2), Book My Place, Staycasa, Evolve, Kaver, CEFAS; Instagram handles for My-Places, Staycasa, Evolve, Supercity, Kaver, Sleepezee; phones/WhatsApp throughout. After the sweep, 19 of 22 wave-one leads have at least one working channel. Still dark: Elan Residences (no web footprint at all), Britannia, and the no-surname hosts. Lesson: the direct-booking site is the richest free contact source we have — bake this sweep into every city run after qualification.
 
 ## Companies House
 

@@ -17,17 +17,17 @@ Each session is ONE phase doc (or a named part of one). Open the next unchecked 
 - [x] **S5 — Phase 05: Pulse integration** — `phases/05-pulse-integration.md` (Mon 8 Sept) — outbound workflow QxVdCclxcIipCccv live, tested end to end
 - [x] **S6a — Phase 06: Lead sourcing, actor bake-off** — `phases/06-lead-sourcing.md` (done Wed 10 Sept) — tri_angle/airbnb-scraper won (host block + portfolio size in one pass, ~1p per qualified lead); recipe in `tools/sourcing.md`; 44 enriched Manchester leads already in Airtable; 7 sourcing fields added to the CRM (ratified)
 - [ ] **S6b — Phase 06: Lead sourcing, first 100 leads** (Tue 9 - Wed 10 Sept) — Manchester done (44); remaining wave 1: Liverpool, Bristol, Cardiff, Newport, Brighton; plus CH + LinkedIn contact routes for the triple-match
-- [x] **S7a — Phase 07: Enrichment & qualification** — `phases/07-enrichment.md` (done Thu 11 Sept) — all 44 verdicts written (7 Qualified with named directors + LinkedIn, 1 Parked on Guesty, 10 Borderline, 26 DQ); holidayfuture seam found + baked into the city run (`tools/sourcing.md`); 5 Hostaway-confirmed seam leads added (Torr + Vista meet the 15-unit floor); handover in `build/HANDOVER.md`
-- [x] **S7b — Phase 07: wave one ranked** (done Thu 11 Sept, a day early) — 22 leads ranked by pain × contactability with Hostaway-billable pinned top, owners split 11/11 (Ciaran + Sophie's + Supercity → Seb), all moved to researched; harvestapi LinkedIn pass found 5 routes (George Torr, Marc Walters, Ozzy Cinalp = Book My Place director, Emma O'Rourke = Kaver founder, Austin Mbawa); under-floor Hostaway operators ride as a light tier per Seb (core write-up pending, see backlog)
-- [ ] **FN 12 Sept — Checkpoint**: Sotirios has run one solo session this week; review what broke, warm-start leads worked, core amendments if any
-- [ ] **S8 — Phase 08: End-to-end dry run** — `phases/08-dry-run.md` (Sun 14 Sept)
-- [ ] **S9 — Phase 09: Scoreboard & notifications** — `phases/09-scoreboard.md` (Mon 15 Sept)
-- [ ] **S10a — Phase 10: Soft launch, first real sends** — `phases/10-soft-launch.md` (Tue 16 - Wed 17 Sept)
-- [ ] **S10b — Phase 10: iterate on friction** (Thu 18 Sept)
+- [x] **S7a — Phase 07: Enrichment & qualification** — `phases/07-enrichment.md` (done Fri 11 Sept) — all 44 verdicts written (7 Qualified with named directors + LinkedIn, 1 Parked on Guesty, 10 Borderline, 26 DQ); holidayfuture seam found + baked into the city run (`tools/sourcing.md`); 5 Hostaway-confirmed seam leads added (Torr + Vista meet the 15-unit floor); handover in `build/HANDOVER.md`
+- [x] **S7b — Phase 07: wave one ranked** (done Fri 11 Sept) — 22 leads ranked by pain × contactability with Hostaway-billable pinned top, owners split 11/11 (Ciaran + Sophie's + Supercity → Seb), all moved to researched; harvestapi LinkedIn pass found 5 routes (George Torr, Marc Walters, Ozzy Cinalp = Book My Place director, Emma O'Rourke = Kaver founder, Austin Mbawa); under-floor Hostaway operators ride as a light tier per Seb (core write-up pending, see backlog)
+- [ ] **Checkpoint — folded into the S8 session (Sun 13 Sept)**: Sotirios has NOT yet run a solo session (chase him); review what broke when he does, warm-start leads worked, core amendments if any (Sleepezee/Zeevou verdict, Shonichi Light write-up)
+- [ ] **S8 — Phase 08: End-to-end dry run** — `phases/08-dry-run.md` (Sun 13 Sept)
+- [ ] **S9 — Phase 09: Scoreboard & notifications** — `phases/09-scoreboard.md` (Mon 14 Sept)
+- [ ] **S10a — Phase 10: Soft launch, first real sends** — `phases/10-soft-launch.md` (Tue 15 - Wed 16 Sept)
+- [ ] **S10b — Phase 10: iterate on friction** (Thu 17 Sept)
 - [ ] **FN 18 Sept — Launch review + Sardinia handover** (in `phases/10-soft-launch.md`)
 - [ ] **Sun 20 Sept — machine signed off at pre-departure review; flip status line to LIVE**
 
-Dates are the default mapping; slide them if a day gets eaten, but the ORDER is fixed — each phase's output feeds the next. If a session finishes its task early, pull the next phase forward; never split an hour across two phases.
+Weekday labels for 12-17 Sept were off by one (11 Sept was a FRIDAY) — corrected Sun 13 Sept; the Fri 18 and Sun 20 anchors were always right. Dates are the default mapping; slide them if a day gets eaten, but the ORDER is fixed — each phase's output feeds the next. If a session finishes its task early, pull the next phase forward; never split an hour across two phases.
 
 ## Backlog (not a session; pick up when a session finishes early)
 

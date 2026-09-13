@@ -16,7 +16,7 @@
 
 Four edits inside the copied code, nothing else changed:
 1. Slim Data and Assemble & Score read the form fields from Normalise Input instead of a form node that no longer exists.
-2. Render Reports: the "62%+ autonomous resolution" line in the onboarding block became "around half of guest messages resolved autonomously and rising monthly". Two more "62%+ resolved autonomously" strings remain in that node's one-pager and full-report onboarding copy (backlog: find and replace in the n8n editor, in both workflows).
+2. Render Reports: the "62%+ autonomous resolution" line in the onboarding block became "around half of guest messages resolved autonomously and rising monthly". The two further "62%+ resolved autonomously" strings in that node's one-pager and full-report onboarding copy were fixed and published on 13 Sept (S8); the outbound workflow now carries zero occurrences. The v3 website workflow still has its copies (Seb, n8n editor — backlog).
 3. Prep Final Data: source Outbound, event Sales OS outbound.
 4. Assemble & Score: the Hostchella event bonus on lead temperature removed.
 
@@ -68,7 +68,7 @@ Test run 8 Sept 06:04 UTC, execution 62711, listing 1739176700405931399: success
 
 Second test run 8 Sept 06:48 UTC, execution 62714, same listing, after those changes: success in 2 min 5 s. Findings blanked by the gate, lead kept at researched with Next action "Pulsed listing has 1 reviews, under the 10 minimum. Pick another listing from this host before messaging.", email subject "Pulse generated, NOT sendable". The first run's Pulses row was deleted so the lead links to one row.
 
-Not yet exercised: the sendable path on a listing with 10+ reviews. The first real pulse in the Phase 08 dry run covers it; check the three findings against the positioning rule by eye that one time.
+The sendable path was exercised in the Phase 08 dry run (13 Sept, first four production-webhook runs): three sendable pulses (scores 51, 63, 74), one correct gate-trip at 9 reviews, all nine findings operational on the one-time eyeball check — positioning rule held. Note from the same session: the 8 Sept review fixes had never been published (the active version was a pre-guard autosave), so S8 published them; after any n8n edit that tests clean, publish immediately.
 
 Seb can also fire and watch runs through the n8n connection in a Claude session (execute_workflow on QxVdCclxcIipCccv with the same payload under webhookData.body). That path needs no environment variable and is the fallback if the script route is unavailable.
 

@@ -2,9 +2,21 @@
 
 For the next Claude session: this is the live state. Read this, `build/QUEUE.md`, and `tools/sourcing.md` before doing anything. `git pull` first, always.
 
+## S8 pre-flight (Sun 13 Sept, Seb) — READ THIS FIRST
+
+State verified Sun 13 Sept: main clean at df6b0f9 (both S7b PRs merged), no pulses fired since the Phase 05 test row, all 22 wave-one leads untouched at `researched`. Sotirios has still not run a solo session — chase, and review it when it exists.
+
+**The dry-run five (locked by Seb, replaces the CEFAS-led list):** Sophie's Homes, Evolve Stays, Torr Property Group, plus two deliberate edge-testers — My-Places (guard stress from the ugly end: 4.34 across 21, rooms product, no verified person) and MCR Hospitality (guard stress from the top end: 4.88 high performer — does a no-pain portfolio produce a sendable headline at all?). Torr CANNOT reach `pulse_ready` (no Airbnb account) — deliberate: it tests the site-data draft path. Coverage across the five: warm route, cold re-approach, no-pulse draft, guard-low, guard-high.
+
+**Blocker, fix FIRST in the S8 session:** four "62%+ resolved autonomously" strings are still live in the outbound pulse workflow (`Property Pulse - Outbound (Sales OS)`, QxVdCclxcIipCccv) render nodes. Approved replacement wording: "around half of guest messages resolved autonomously" (two spots in the same nodes already use it). Fixable through the n8n connection. The old v3 website workflow (2Ntw5XxiKpFd2my8) is not MCP-accessible — Seb fixes that copy in the n8n editor; not launch-gating.
+
+Calendar correction (13 Sept): 11 Sept was a FRIDAY. Queue weekday labels for 12-17 Sept were off by one and are now fixed; the Fri 18 and Sun 20 anchors were always right. Corrected run-in: S8 Sun 13, S9 Mon 14, S10a Tue 15 - Wed 16, S10b Thu 17, FN launch review Fri 18, sign-off Sun 20.
+
+Mid-session decisions for Seb when the moment comes: Sleepezee fit verdict (Zeevou evidence in the record) and the Shonichi Light `core/` write-up (backlog).
+
 ## Where the build is
 
-- **Phase 07 COMPLETE** (S7a + S7b, both done Thu 11 Sept — S7b ran a day early). Next up: **FN 12 Sept checkpoint** (Sotirios solo-session review), then **S8 dry run** (Sun 14 Sept, `build/phases/08-dry-run.md`).
+- **Phase 07 COMPLETE** (S7a + S7b, both done Fri 11 Sept). Next up: **S8 dry run** (Sun 13 Sept, `build/phases/08-dry-run.md`), checkpoint items folded in — see the pre-flight block above.
 - Machine status: still BUILD PHASE. Deadline unchanged: live by Fri 18 Sept, signed off Sun 20 Sept.
 
 ## Airtable state (base appitDnbs9KM3DpQR, Leads tblPKi621zaYsyNiw)
@@ -69,7 +81,7 @@ Decisions 1-8 from S7a stand (tri_angle actor, city order, two-step city run, ho
 - Seb sent LinkedIn connection requests to the wave-one profiles on 11 Sept evening (noted per record). When accepts come in, first messages ride the S10 sequences.
 - Measured cost of the whole Manchester cohort to date: about £0.70 of Apify plan credits (sweep $0.50 + bake-off reject $0.27 + ~$0.15 of LinkedIn actor results; CH, holidayfuture, site fetches free). Roughly 1.5p per lead in the base, ~4p per researched wave-one lead.
 
-## For the FN 12 Sept checkpoint + S8 dry run
+## For the S8 dry run + checkpoint items
 
 - Personalisation spot-check passed on the top five (Torr, Vista, CEFAS, Evolve, Staycasa): decision-maker first name + one specific true finding + portfolio size + city all present in each record.
 - S8 dry run picks from wave one. **CEFAS is the flagged candidate** (strongest pain, LinkedIn route, pulse targets sitting in its Portfolio preview). Torr/Vista cannot take a pulse yet — no Airbnb host ID — their pitch runs off their own Hostaway direct sites instead.

@@ -6,11 +6,13 @@ nudge lives here. Setting it up is optional but the competition works better arm
 
 ## What it does
 
-Every weekday evening, your Claude account opens a fresh session in your Shonichi
-environment, pulls this repo, reads the scoreboard and the other founder's logs, and
-pushes ONE short notification to your phone. Example:
+Every weekday MORNING, before the session hour, your Claude account opens a fresh
+session in your Shonichi environment, pulls this repo, reads the scoreboard and
+yesterday's logs, and pushes ONE short notification to your phone — priming the
+session you are about to run (touches happen in the morning; an evening brief
+reports a dead day — Seb, 15 Sept). Example:
 
-> Seb logged 6 touches today, you're 4 behind on the week (11 vs 15, target 25). Your streak: 3 days.
+> Seb logged 6 touches yesterday, you're 4 behind on the week (11 vs 15, target 25). Your streak: 3 days.
 
 ## Setup (10 minutes, once)
 
@@ -18,19 +20,21 @@ pushes ONE short notification to your phone. Example:
    environment with this repo (the same "Shonichi" environment used for sessions —
    it already carries your `PULSE_*` variables; `SLACK_WEBHOOK_URL` optional here,
    the routine never posts to Slack).
-2. On claude.ai → Code, create a scheduled task (Routine): weekdays, 18:00 UK,
-   fresh session each run, in the Shonichi environment.
-3. Prompt for the Routine (paste as-is, swap the founder names for Sotirios):
+2. On claude.ai → Code, create a scheduled task (Routine): weekdays, morning
+   before your session hour (Seb runs 06:00 UK), fresh session each run, in the
+   Shonichi environment.
+3. Prompt for the Routine (paste as-is; written for Sotirios):
 
    ```
-   git pull, then run tools/scoreboard. Read my latest log in logs/sotirios/ and
-   Seb's latest in logs/seb/. Send me one push notification, two sentences
-   maximum: what Seb logged today (touches/replies/pulses), my week total vs
-   his vs the 25 target, and my current session-day streak. If a log records
-   replies or demos, name the company only (e.g. "1 reply (Evolve)"), never a
-   person. No other prospect data in the notification. If neither of us logged
-   today, say exactly that in one sentence. Do nothing else: no commits, no
-   sends, no Airtable writes.
+   git pull, then run tools/scoreboard. Read yesterday's logs in logs/seb/ and
+   logs/sotirios/ (on Monday, Friday through Sunday). Send me one push
+   notification, two sentences maximum: what Seb logged yesterday
+   (touches/replies/pulses), my week-to-date total vs his vs the 25 target, and
+   my current session-day streak (on Monday morning give last week's final
+   score instead). If a log records replies or demos, name the company only
+   (e.g. "1 reply (Evolve)"), never a person. No other prospect data in the
+   notification. If neither of us logged yesterday, say exactly that in one
+   sentence. Do nothing else: no commits, no sends, no Airtable writes.
    ```
 
 4. Test it once by firing the Routine manually; check the notification lands.
@@ -48,9 +52,10 @@ pushes ONE short notification to your phone. Example:
 
 ## Status
 
-- Seb: LIVE since 15 Sept — Routine `trig_019ZAgetqQXYkmzXdHzp67zB`, weekdays
-  17:06 UTC (18:06 UK in summer; drifts to 17:06 UK when BST ends 25 Oct — nudge
-  it then if that grates), fresh session per run, push on.
+- Seb: LIVE since 15 Sept — Routine `trig_019ZAgetqQXYkmzXdHzp67zB` "Shonichi
+  morning brief (Seb)", weekdays 05:07 UTC (06:07 UK in summer; drifts to 05:07 UK
+  when BST ends 25 Oct — nudge it then), fresh session per run, push on. Moved
+  from evening to morning same day (Seb: touches happen in the morning).
 - Sotirios: queued for his return from holiday — bundle with his other setup
   (solo session walkthrough, `PULSE_WEBHOOK_URL` + `PULSE_FOUNDER_EMAIL` env vars,
   `shonichi.app.n8n.cloud` + `hooks.slack.com` allowlist, this routine). Must land

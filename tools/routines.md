@@ -52,10 +52,11 @@ reports a dead day — Seb, 15 Sept). Example:
 
 ## Status
 
-- Seb: LIVE since 15 Sept — Routine `trig_019ZAgetqQXYkmzXdHzp67zB` "Shonichi
-  morning brief (Seb)", weekdays 05:07 UTC (06:07 UK in summer; drifts to 05:07 UK
-  when BST ends 25 Oct — nudge it then), fresh session per run, push on. Moved
-  from evening to morning same day (Seb: touches happen in the morning).
+- Seb: PAUSED (15 Sept, his call) — Routine `trig_019ZAgetqQXYkmzXdHzp67zB`
+  "Shonichi morning brief (Seb)" exists, disabled, fires nothing. Re-enable in
+  any session with one line naming the time YOU want (e.g. "turn my morning
+  brief on at 7:30"). Worth revisiting once the machine is LIVE and there are
+  real numbers to wake up to.
 - Sotirios: queued for his return from holiday — bundle with his other setup
   (solo session walkthrough, `PULSE_WEBHOOK_URL` + `PULSE_FOUNDER_EMAIL` env vars,
   `shonichi.app.n8n.cloud` + `hooks.slack.com` allowlist, this routine). Must land

@@ -32,7 +32,8 @@ All scraping runs through n8n (`shonichi.app.n8n.cloud`) using credentials store
 | **City sweep (the standard run)** | `S6 City Sweep — tri_angle` (workflow `lLkaM2BPXAmCYT6E`) | Built 17 Sept. Edit `locationQueries` in the tri_angle node per city, execute the `Run city sweep` trigger. A `Group by host` Code node applies load rules 1 and 3 in the workflow and emits one slim item per host (plus a summary item first). The `Reprocess last run` trigger re-reads the actor's last SUCCEEDED dataset for free, so a run is never paid for twice. Always read the `Group by host` output in a session, never the raw actor output: raw rows are ~15KB each |
 | LinkedIn schema fetch | `S7 LinkedIn Actor Schema Fetch` | harvestapi actor internal IDs + input schemas |
 | LinkedIn route pass | `S7 LinkedIn Route Pass` | harvestapi no-cookie person/employee search for route-dead leads. Edit the `Search targets` Code node per batch, execute, judge the `Route candidates` output. Short mode, pay-per-result (~$0.05 per 10-query batch) |
-| Contact sweep | `S7 Contact Sweep` | Fetches direct-booking sites and extracts emails, phones, Instagram, WhatsApp, contact links. Edit the `Site list` Code node per city cohort. Sessions cannot fetch these sites directly (egress proxy); n8n can |
+| Contact sweep | `S7 Contact Sweep` | Fetches direct-booking sites and extracts emails, phones, Instagram, WhatsApp, LinkedIn, contact and booking links. From 17 Sept it also reports `pmsTells`: counts of PMS and booking-engine names in the page HTML (`mews.com`, `bookingenginecdn.hostaway.com`, `checkout.lodgify.com`, `guestybookings.com`, eviivo, Boostly and the rest). Domain and script hits are hard gate-4 evidence; bare names on a Boostly or Lodgify template are noise. Edit the `Site list` Code node per city cohort. Sessions cannot fetch these sites directly (egress proxy); n8n can |
+| Officer search | `S7 CH Officer Search` (workflow `8qxG0su8BPHt1Oaj`) | Built 17 Sept. Person name to Companies House officer search to their appointments. For trading-name brands where the company search stalls: it resolved BCE's group from the two directors on the site's email domain. Edit the `Officer queries` Code node per batch. Judge candidates by address and birth month: common names return several people |
 
 Claude runs these through the n8n connection in a session. Ask in plain English: "run the sourcing search for Liverpool".
 
@@ -113,7 +114,20 @@ Bristol is thinner than Manchester at the top: 24 hosts at 5+ against 51, and th
 
 **Verification sweep:** no host-ID or listing-ID overlap with the Manchester base. Two name-only collisions (a second Michelle and a second Peter, both suffixed in Company to keep the primary field unambiguous). One Bristol web: Tina and Peter (Berkeley Square) share five listing IDs, one Georgian townhouse in Clifton, LINKED on both rows. Cohost Partners is multi-city (Swansea, Cardiff, Warrington, Bristol) and is the first Cardiff-area operator in the base.
 
-**Next:** the Bristol cohort needs its Phase 07 pass (one-minute test, CH sweep on the five brands, contact sweep, owner assignment) before any of it can be sent to.
+**Phase 07 pass (same day, Seb's call to run it straight after the sweep):** three CH batches, one officer search, two contact sweeps with PMS tells, targeted web searches for LinkedIn. Every gate, contact and owner written to the 21 rows.
+
+| Verdict | Leads | Why |
+|---|---|---|
+| **Qualified** | **ShortStayUK** (32, host rating 3.59, P1, sotirios), **Cohost Partners (StayRight)** (70, Cardiff, PMS unknown, P2, sotirios) | ShortStayUK's direct site runs the Hostaway booking engine: the only gate-4 confirmation in the cohort, and the weakest host score in the base. Cohost was bought by StayRight (Cardiff) in Sept 2025; directors Zac Ratcliffe and Eve D'Arcy on LinkedIn |
+| **Parked** (not Hostaway) | Host360 (73, eviivo), Bespoke Cultural Escapes (61, Lodgify), Brunel Stays (23, Lodgify), Hopewell (Guesty) | All four pass gates 1, 2, 3 and 5 with named directors and emails. They are the Bristol re-approach list for the Marketplace launch |
+| **Borderline** (owner seb, P3) | CCP Stays (11, Charlie Cook, light tier), Donny (11, one building), Dave (19, co-host, route-dead), Albert (17, new, route-dead) | Under the floor or no identity to chase |
+| **Disqualified** | Your Apartment (Mews hotel PMS, gate 3: PROPOSED, Seb to confirm or override), Roost (10, Guesty, Reading), Curated Property (7), Tom / Clifton Lets (5), Emma, Tina + Peter, Michelle, Ned & Hugh, Michaela, Kate | Under the floor, single buildings, rural, private landlords |
+
+**What Bristol says about the pool:** zero Hostaway-confirmed operators inside the city. The five branded Bristol operators run Mews, eviivo, Lodgify, Lodgify and Guesty. The one Hostaway operator the sweep caught (ShortStayUK) is Milton Keynes-based and surfaced through a single Bradley Stoke unit. Bristol's sendable output from a $0.52 sweep is two leads, one of them in Cardiff. Parked is where Bristol's value sits until the Marketplace listing exists.
+
+**Route lessons:** (1) the site's email domain is a Companies House key when the brand is a trading name (BCE). (2) Boostly-built sites name every PMS in their template, so a bare "hostaway" string is not evidence; only `bookingenginecdn.hostaway.com`, `holidayfuture.com`, `checkout.lodgify.com`, `mews.com` and `guestybookings.com` count. (3) Acquisitions make the Airbnb about text stale: check CH officer appointment dates (Cohost).
+
+**Next:** ShortStayUK and Cohost/StayRight need a pulse each (targets in Next action). Seb: confirm the Your Apartment DQ and the owner split (both Qualified to Sotirios for the holiday window).
 
 ## Duplicates, multi-city hosts and linked businesses
 

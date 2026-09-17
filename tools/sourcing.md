@@ -2,7 +2,7 @@
 
 How to source ICP-qualified STR operator leads from Airbnb into Airtable. Either founder can run this; every step goes through n8n so no API keys are needed on your machine.
 
-**Status: S6a complete, ratified by Seb 10 Sept 2026. Winner: tri_angle. Manchester's 44 leads loaded to Airtable.**
+**Status: S6a complete, ratified by Seb 10 Sept 2026. Winner: tri_angle. Manchester's 44 leads loaded to Airtable. S6b in progress: Bristol run done 17 Sept 2026 (20 leads + 1 parked), see City run results below.**
 
 ## The pipeline (as proven in the bake-off)
 
@@ -29,11 +29,14 @@ All scraping runs through n8n (`shonichi.app.n8n.cloud`) using credentials store
 | CH test workflow | `S6 Companies House Credential Test` | Fire any time to re-verify the key |
 | Actor schema fetch | `S6 Actor Schema Fetch` | Pulls any actor's input schema + internal ID via the Apify API. Reuse before wiring any new actor |
 | Bake-off workflow | `S6 Bake-off Round 1 — Airbnb search actors` | Also carries the `Run costs` branch for per-run USD figures |
+| **City sweep (the standard run)** | `S6 City Sweep — tri_angle` (workflow `lLkaM2BPXAmCYT6E`) | Built 17 Sept. Edit `locationQueries` in the tri_angle node per city, execute the `Run city sweep` trigger. A `Group by host` Code node applies load rules 1 and 3 in the workflow and emits one slim item per host (plus a summary item first). The `Reprocess last run` trigger re-reads the actor's last SUCCEEDED dataset for free, so a run is never paid for twice. Always read the `Group by host` output in a session, never the raw actor output: raw rows are ~15KB each |
 | LinkedIn schema fetch | `S7 LinkedIn Actor Schema Fetch` | harvestapi actor internal IDs + input schemas |
 | LinkedIn route pass | `S7 LinkedIn Route Pass` | harvestapi no-cookie person/employee search for route-dead leads. Edit the `Search targets` Code node per batch, execute, judge the `Route candidates` output. Short mode, pay-per-result (~$0.05 per 10-query batch) |
 | Contact sweep | `S7 Contact Sweep` | Fetches direct-booking sites and extracts emails, phones, Instagram, WhatsApp, contact links. Edit the `Site list` Code node per city cohort. Sessions cannot fetch these sites directly (egress proxy); n8n can |
 
 Claude runs these through the n8n connection in a session. Ask in plain English: "run the sourcing search for Liverpool".
+
+The n8n connector must be authorised in the founder's claude.ai connector settings before a session can fire any of these. Sessions cannot reach Apify, Companies House, Airbnb or holidayfuture sites directly: the Claude Code environment's network allowlist carries only `shonichi.app.n8n.cloud` (and `hooks.slack.com`) by design, so web search from a session is the only non-n8n route and it is near useless for the seam (17 Sept lesson).
 
 ## Bake-off results (S6a, 10 Sept 2026, test city Manchester)
 
@@ -87,7 +90,7 @@ Notes:
 
 ## Loading to Airtable (ratified 10 Sept, done for Manchester)
 
-Post-processing rules, applied by Claude in-session (S6b may move them into the workflow):
+Post-processing rules. From 17 Sept rules 1 and 3 run inside `S6 City Sweep — tri_angle` (the `Group by host` node); rules 2, 4, 5 and the verification sweep stay with Claude in-session:
 
 1. Drop rows with a null host (delisted or hotel-inventory rows; 7 of 150 in Manchester).
 2. Dedupe by `host.id`, then by brand name (one lead per brand; note the second host account in Notes, e.g. City SuperHost runs two).
@@ -97,6 +100,20 @@ Post-processing rules, applied by Claude in-session (S6b may move them into the 
 6. Gate judgements (Professional host, ICP fit, Owner) are NOT set at sourcing. `new` means gates unchecked; Phase 07 runs the one-minute test.
 
 Manchester result: 44 leads loaded 10 Sept from the bake-off dataset, fully enriched.
+
+## City run results
+
+### Bristol (Seb, Thu 17 Sept 2026)
+
+**Seam:** `site:holidayfuture.com Bristol` and eight query variants returned only Higgihaus and Altoluxo (our own companies), one Cape Town operator and Bath/Cheltenham noise. Bristol has no free Hostaway-confirmed operators from the seam. Negative tells found instead: Hopewell Short Lets Ltd, Market My Property Ltd and Green Acorn Holiday Homes Ltd all run `guestybookings.com` direct sites (Guesty). Hopewell (independent Bristol agency, Prince Street Studios alone is 15 serviced apartments, CH 10096294, co-founders Adam Kershaw and Maxwell Hope) loaded as `parked` on the City Superhost precedent; the other two noted only.
+
+**Sweep** (`S6 City Sweep — tri_angle`, execution 63706, Apify run wd3maBxOoiSAbJFX6): 156 rows in 102 s, **$0.52** (156 enriched listings at $0.00335 each). 5 null-host rows, 124 unique hosts, 24 with 5+ managed listings, 15 with 10+, 12 with 15+. Cut above 150: Travelnest (1,224), Toad Hall Cottages (357), Birch Stays (189), Pass The Property (165). **20 hosts loaded as `new`** with the full sourcing block.
+
+Bristol is thinner than Manchester at the top: 24 hosts at 5+ against 51, and the 15+ band is 12 hosts, five of them branded operators (Your Apartment 127, Host360 73, Cohost Partners 70, Bespoke Cultural Escapes 61, Brunel Stays 23), plus Short Stay Uk (32, host rating 3.59) and three personal-name hosts (Dave 19, Albert 17). Below the floor sit the light-tier shapes (Donny 11, CCP Stays 11, Roost 10) and single-building room operators (CoalShed, 3 Berkeley Square, BOHO Rooms). Pulse angles by host rating: Short Stay Uk 3.59, Host360 4.28, Roost 4.32, Cohost Partners 4.35, Your Apartment 4.53.
+
+**Verification sweep:** no host-ID or listing-ID overlap with the Manchester base. Two name-only collisions (a second Michelle and a second Peter, both suffixed in Company to keep the primary field unambiguous). One Bristol web: Tina and Peter (Berkeley Square) share five listing IDs, one Georgian townhouse in Clifton, LINKED on both rows. Cohost Partners is multi-city (Swansea, Cardiff, Warrington, Bristol) and is the first Cardiff-area operator in the base.
+
+**Next:** the Bristol cohort needs its Phase 07 pass (one-minute test, CH sweep on the five brands, contact sweep, owner assignment) before any of it can be sent to.
 
 ## Duplicates, multi-city hosts and linked businesses
 

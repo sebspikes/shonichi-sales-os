@@ -121,13 +121,14 @@ Bristol is thinner than Manchester at the top: 24 hosts at 5+ against 51, and th
 | **Qualified** | **ShortStayUK** (32, host rating 3.59, P1, sotirios), **Cohost Partners (StayRight)** (70, Cardiff, PMS unknown, P2, sotirios) | ShortStayUK's direct site runs the Hostaway booking engine: the only gate-4 confirmation in the cohort, and the weakest host score in the base. Cohost was bought by StayRight (Cardiff) in Sept 2025; directors Zac Ratcliffe and Eve D'Arcy on LinkedIn |
 | **Parked** (not Hostaway) | Host360 (73, eviivo), Bespoke Cultural Escapes (61, Lodgify), Brunel Stays (23, Lodgify), Hopewell (Guesty) | All four pass gates 1, 2, 3 and 5 with named directors and emails. They are the Bristol re-approach list for the Marketplace launch |
 | **Borderline** (owner seb, P3) | CCP Stays (11, Charlie Cook, light tier), Donny (11, one building), Dave (19, co-host, route-dead), Albert (17, new, route-dead) | Under the floor or no identity to chase |
-| **Disqualified** | Your Apartment (Mews hotel PMS, gate 3: PROPOSED, Seb to confirm or override), Roost (10, Guesty, Reading), Curated Property (7), Tom / Clifton Lets (5), Emma, Tina + Peter, Michelle, Ned & Hugh, Michaela, Kate | Under the floor, single buildings, rural, private landlords |
+| **Qualified, OpIntel only** | **Your Apartment** (127, Mews hotel PMS, P2, seb) | Proposed DQ at gate 3; Seb override 21 Sept: kept alive for the data product only, no comms pitch. Toby Guest on LinkedIn |
+| **Disqualified** | Roost (10, Guesty, Reading), Curated Property (7), Tom / Clifton Lets (5), Emma, Tina + Peter, Michelle, Ned & Hugh, Michaela, Kate | Under the floor, single buildings, rural, private landlords |
 
 **What Bristol says about the pool:** zero Hostaway-confirmed operators inside the city. The five branded Bristol operators run Mews, eviivo, Lodgify, Lodgify and Guesty. The one Hostaway operator the sweep caught (ShortStayUK) is Milton Keynes-based and surfaced through a single Bradley Stoke unit. Bristol's sendable output from a $0.52 sweep is two leads, one of them in Cardiff. Parked is where Bristol's value sits until the Marketplace listing exists.
 
 **Route lessons:** (1) the site's email domain is a Companies House key when the brand is a trading name (BCE). (2) Boostly-built sites name every PMS in their template, so a bare "hostaway" string is not evidence; only `bookingenginecdn.hostaway.com`, `holidayfuture.com`, `checkout.lodgify.com`, `mews.com` and `guestybookings.com` count. (3) Acquisitions make the Airbnb about text stale: check CH officer appointment dates (Cohost).
 
-**Next:** ShortStayUK and Cohost/StayRight need a pulse each (targets in Next action). Seb: confirm the Your Apartment DQ and the owner split (both Qualified to Sotirios for the holiday window).
+**Next:** ShortStayUK and Cohost/StayRight need a pulse each (targets in Next action); Your Apartment is Seb's OpIntel-only first touch on his return. Owner split confirmed 21 Sept: the two Hostaway-shaped Qualified leads to Sotirios for the holiday window, Your Apartment and the Borderlines to Seb.
 
 ## Duplicates, multi-city hosts and linked businesses
 

@@ -2,7 +2,7 @@
 
 How to source ICP-qualified STR operator leads from Airbnb into Airtable. Either founder can run this; every step goes through n8n so no API keys are needed on your machine.
 
-**Status: S6a complete, ratified by Seb 10 Sept 2026. Winner: tri_angle. Manchester's 44 leads loaded to Airtable. S6b in progress: Bristol run done 17 Sept 2026 (20 leads + 1 parked), see City run results below.**
+**Status: S6a complete, ratified by Seb 10 Sept 2026. Winner: tri_angle. Manchester's 44 leads loaded. S6b in progress: Bristol (17 Sept, 21 rows) and Cardiff (21 Sept, 35 rows) done with their Phase 07 passes, see City run results below. Base: 105 leads.**
 
 ## The pipeline (as proven in the bake-off)
 
@@ -33,6 +33,7 @@ All scraping runs through n8n (`shonichi.app.n8n.cloud`) using credentials store
 | LinkedIn schema fetch | `S7 LinkedIn Actor Schema Fetch` | harvestapi actor internal IDs + input schemas |
 | LinkedIn route pass | `S7 LinkedIn Route Pass` | harvestapi no-cookie person/employee search for route-dead leads. Edit the `Search targets` Code node per batch, execute, judge the `Route candidates` output. Short mode, pay-per-result (~$0.05 per 10-query batch) |
 | Contact sweep | `S7 Contact Sweep` | Fetches direct-booking sites and extracts emails, phones, Instagram, WhatsApp, LinkedIn, contact and booking links. From 17 Sept it also reports `pmsTells`: counts of PMS and booking-engine names in the page HTML (`mews.com`, `bookingenginecdn.hostaway.com`, `checkout.lodgify.com`, `guestybookings.com`, eviivo, Boostly and the rest). Domain and script hits are hard gate-4 evidence; bare names on a Boostly or Lodgify template are noise. Edit the `Site list` Code node per city cohort. Sessions cannot fetch these sites directly (egress proxy); n8n can |
+| Site scan | `S7 Holidayfuture Site Scan` | Counts listing IDs on a Hostaway direct site. Works on custom-domain Hostaway sites too (stay.airserviced.com, smartcorporatestays.com, koyahomes.co.uk): the `/listings/<id>` pattern is the engine's, not the domain's. The all-listings page shows 18 per page and `?page=` does not paginate, so 18 means 18+. Zeevou sites return 500 to it |
 | Officer search | `S7 CH Officer Search` (workflow `8qxG0su8BPHt1Oaj`) | Built 17 Sept. Person name to Companies House officer search to their appointments. For trading-name brands where the company search stalls: it resolved BCE's group from the two directors on the site's email domain. Edit the `Officer queries` Code node per batch. Judge candidates by address and birth month: common names return several people |
 
 Claude runs these through the n8n connection in a session. Ask in plain English: "run the sourcing search for Liverpool".
@@ -129,6 +130,28 @@ Bristol is thinner than Manchester at the top: 24 hosts at 5+ against 51, and th
 **Route lessons:** (1) the site's email domain is a Companies House key when the brand is a trading name (BCE). (2) Boostly-built sites name every PMS in their template, so a bare "hostaway" string is not evidence; only `bookingenginecdn.hostaway.com`, `holidayfuture.com`, `checkout.lodgify.com`, `mews.com` and `guestybookings.com` count. (3) Acquisitions make the Airbnb about text stale: check CH officer appointment dates (Cohost).
 
 **Next:** ShortStayUK and Cohost/StayRight need a pulse each (targets in Next action); Your Apartment is Seb's OpIntel-only first touch on his return. Owner split confirmed 21 Sept: the two Hostaway-shaped Qualified leads to Sotirios for the holiday window, Your Apartment and the Borderlines to Seb.
+
+### Cardiff (Seb, Mon 21 Sept 2026)
+
+**Seam:** `site:holidayfuture.com Cardiff` and three variants surfaced eight Hostaway direct sites beyond Higgihaus: JRY Property Group, MySA Properties, Solace Stays (70214_1), Smart Corporate Stays (57058_1), Holm House / Airserviced, Dragon Apartments (162510_1), Qasim Din, and an empty 76142_1. Site scan: four at 18+ (page cap), Holm House 10, Dragon 5, Qasim Din 8. Negative tells: five Zeevou operators (StaySouthWales, Classy Comfort, Dyzyn, FabAccommodation, Dwell Haven) and Bloqq on Guesty.
+
+**Sweep** (`S6 City Sweep — tri_angle`, execution 64198, 97 s): 152 rows, 8 null-host, 124 unique hosts, 30 with 5+, 21 with 10+, 12 with 15+. One account cut above 150 (Travelnest 896). 29 kept; Cohost Partners already in the base (upsert on host ID, note appended), 28 new rows. Three Cardiff webs: Starlight Stays + The Collective Club (4 shared IDs), MYGUEST + Safwan (1), Sarah & Wyn + Sarah (5). Two name collisions with the base (Adam, Eva) suffixed.
+
+**Phase 07 pass, same session:** three CH batches (24 brands, 15 matched with judgement), two contact sweeps with PMS tells, site scans, targeted web searches. All 35 rows carry gates, PMS evidence, contacts, owner, priority, pain signals and a suggested pulse target (the assembly script picks the lowest-rated unit with 10+ reviews).
+
+| Verdict | Leads | Why |
+|---|---|---|
+| **Qualified, Hostaway confirmed** | **Koya Homes** (22, rating 4.49, P1), **JRY Property Group** (18+, P1), **Solace Stays** (18+, P1), **MySA Properties** (18+, P2), **Smart Corporate Stays** (18+, Chesterfield, P2), all owner sotirios | Booking engine on the direct site in every case. Koya and JRY have named founders with direct emails; Solace has chris@ and a co-founder on LinkedIn; Smart Corporate Stays' founder is on LinkedIn and announcing a franchise |
+| **Borderline P2** | StayServiced / Airserviced + Holm House (about 29, Hostaway, no named owner, sotirios), InspoHome (56, PMS unknown, seb), MYGUEST Ltd (26, seb), Jaymin / Berriman Collection (67, no identity, seb) | Gate 5 or gate 4 open |
+| **Parked** | Starlight Stays (38, Smoobu), StaySouthWales (Zeevou) | Not Hostaway; Starlight's founder Aaron Baynton is on LinkedIn |
+| **Borderline P3, light tier** | Brodyr Property (13), Builders Beds (11), Adam (12), The Iconic Spaces (17, new), KR Short Stays (24, Reading), Dragon Apartments (5, Hostaway), Qasim Din (8, Hostaway) | Under the floor or too new |
+| **Disqualified** | Bloqq (student rooms, Guesty), Cardiff Bay Hostel, Charlie And Abi, Pete, Safwan, Kobir, Sarah & Wyn, Sarah, The Collective Club, Kash, Hayley, Jodie, Raymond, Jonathan, Lottie, Eva, Sian | Rooms in one building, duplicate webs, private hosts under the floor |
+
+**What Cardiff says about the pool:** the opposite of Bristol. Six Hostaway-confirmed operators at or above the floor in one city, five of them Qualified today, against zero in Bristol. Cardiff plus the two StayRight and ShortStayUK leads gives Sotirios seven Hostaway-shaped Qualified leads for the holiday window. The seam is what found them: four of the five Qualified operators were not in the top-150 Airbnb sweep at all.
+
+**Route lessons:** (1) A host's about text can carry a rebrand ('formerly Airserviced') that ties an Airbnb account to a seam site: read every about text against the seam list before creating rows. (2) Custom-domain Hostaway sites (smartcorporatestays.com, koyahomes.co.uk, stay.airserviced.com) never show in a `site:holidayfuture.com` search; the contact sweep's `bookingenginecdn.hostaway.com` tell is what catches them, so run it on every brand's own domain. (3) One brand can reference two engines at once (Solace: Guesty link on the main site, Hostaway engine live): record both and ask. (4) A shared registered office (14 Museum Place: StayRight and MySA) is an accountant, not a link.
+
+**Next:** five pulses for Sotirios (targets in each Next action; the four seam-only rows need their Airbnb host account found first or the 02d site-data variant). LinkedIn actor pass on the six named directors with no profile found (Davenport, Ahmadi, Adetula, Adekoya, Abou Hamda, the Hawkins-Smiths).
 
 ## Duplicates, multi-city hosts and linked businesses
 

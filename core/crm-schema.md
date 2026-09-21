@@ -69,6 +69,14 @@ One row per operator. Fields grouped by what they are for.
 | Touch count | count of Touches | fldEp1wgVjM6DLLXP |
 | Last touch date | rollup MAX(Touches.Date) | fldv0usCcqyTYfwS2 |
 | Headline finding | lookup from Pulses | fldYOiN6XDBzjyhWv |
+| Second finding | lookup from Pulses | fldPHM4zsMgeSjPFK |
+| Pulse report URL | lookup from Pulses (Report URL) | fld5S5EujyoxqLzJ5 |
+| Pulse one-pager URL | lookup from Pulses (One-pager URL) | fldHmK5DSNzmkPN5B |
+| Pulse score | lookup from Pulses (Score) | fld1YYXj6yTsF38Eu |
+| Pulse listing URL | lookup from Pulses (Listing URL) | fldkdQdFqEd3ej8Mp |
+| Pulse date | lookup from Pulses (Date generated) | fldGceZgjQdZ1ZeG3 |
+
+The six pulse lookups (Second finding through Pulse date) were added 21 Sept 2026 (Seb) so a single Leads export carries each lead's pulse: report and one-pager links, score, listing, date, and both findings. They fill automatically from the linked Pulses row; nothing is written to them by hand.
 
 ## Touches (`tbl3JhCvwoQTWqW4E`)
 
